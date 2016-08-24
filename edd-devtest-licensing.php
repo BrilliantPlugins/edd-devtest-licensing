@@ -69,7 +69,6 @@ class EDD_DevTest_Licensing {
 	public function add_tlds( $tlds ) {
 		$edd_settings = $this->get_settings();
 		$extra_tlds = isset( $edd_settings['edd_sl_bypass_tlds'] ) ? explode( "\r\n", $edd_settings['edd_sl_bypass_tlds'] ) : $this->get_extra_tlds();
-		die( '<pre>' . var_export( array_merge( $tlds, $extra_tlds ), true ) );
 		return array_merge( $tlds, $extra_tlds );
 	}
 
