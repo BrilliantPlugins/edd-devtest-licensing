@@ -113,6 +113,9 @@ class EDD_DevTest_Licensing {
 		return ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE );
 	}
 
+	/**
+	 * Domains .dev & .local automatically included by EDD Software Licensing.
+	 */
 	private function get_extra_tlds() {
 		return array(
 			'.lan',
@@ -127,6 +130,9 @@ class EDD_DevTest_Licensing {
 		);
 	}
 
+	/**
+	 * Subdomains dev. and staging. automatically included by EDD Software Licensing.
+	 */
 	private function get_extra_subdomains() {
 		return array(
 			'stage.',
