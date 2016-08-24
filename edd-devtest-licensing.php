@@ -51,14 +51,14 @@ class EDD_DevTest_Licensing {
 					'name' => __( 'Ignore domains and TLDs', 'edd_sl' ),
 					'desc' => __( 'Enter domains and TLDs (one per line) for additional development domains (.dev & .local automatically included).', 'edd_sl' ),
 					'type' => 'textarea',
-					'std'  => implode( PHP_EOL, $this->get_extra_tlds() ),
+					'std'  => implode( "\r\n", $this->get_extra_tlds() ),
 				);
 				$sl_settings[] = array(
 					'id'   => 'edd_sl_bypass_subdomains',
 					'name' => __( 'Ignore subdomains', 'edd_sl' ),
 					'desc' => __( 'Enter subdomains (one per line) for additional development domains (dev. and staging. automatically included).', 'edd_sl' ),
 					'type' => 'textarea',
-					'std'  => implode( PHP_EOL, $this->get_extra_subdomains() ),
+					'std'  => implode( "\r\n", $this->get_extra_subdomains() ),
 				);
 				$settings['software-licensing'] = array_merge( $sl_settings, $second_part );
 			}
@@ -68,13 +68,14 @@ class EDD_DevTest_Licensing {
 
 	public function add_tlds( $tlds ) {
 		$edd_settings = $this->get_settings();
-		$extra_tlds = isset( $edd_settings['edd_sl_bypass_tlds'] ) ? $edd_settings['edd_sl_bypass_tlds'] : $this->get_extra_tlds();
+		$extra_tlds = isset( $edd_settings['edd_sl_bypass_tlds'] ) ? explode( "\r\n", $edd_settings['edd_sl_bypass_tlds'] ) : $this->get_extra_tlds();
+		die( '<pre>' . var_export( array_merge( $tlds, $extra_tlds ), true ) );
 		return array_merge( $tlds, $extra_tlds );
 	}
 
 	public function add_subdomains( $subdomains ) {
 		$edd_settings = $this->get_settings();
-		$extra_subdomains = isset( $edd_settings['edd_sl_bypass_subdomains'] ) ? $edd_settings['edd_sl_bypass_subdomains'] : $this->get_extra_subdomains();
+		$extra_subdomains = isset( $edd_settings['edd_sl_bypass_subdomains'] ) ?  explode( "\r\n", $edd_settings['edd_sl_bypass_subdomains'] ) : $this->get_extra_subdomains();
 		return $subdomains;
 	}
 
